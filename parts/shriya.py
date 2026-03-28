@@ -1,6 +1,7 @@
 def parse_constraint(constraint, num_vars):
     parts = re.split(r'(<=|>=|=)', constraint)
     expr, sign, val = parts[0], parts[1], float(parts[2])
+
     row = [0] * num_vars
     terms = re.findall(r'([+-]?\d*)x(\d+)', expr.replace(" ", ""))
 
