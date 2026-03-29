@@ -28,3 +28,47 @@
 
     except Exception as e:
         st.error(f"Error: {e}")
+
+
+
+
+def plot_graph(A, b, solution, num_vars):
+    fig = plt.figure()
+
+    # ✅ 2 VARIABLES
+    if num_vars == 2:
+        ax = fig.add_subplot(111)
+        x = np.linspace(0, 10, 200)
+
+        for i in range(len(A)):
+            a1, a2 = A[i]
+            if a2 != 0:
+                y = (b[i] - a1 * x) / a2
+                ax.plot(x, y)
+
+        ax.scatter(solution[0], solution[1])
+        ax.set_xlabel("x1")
+        ax.set_ylabel("x2")
+        ax.set_title("2D Graph")
+
+    # ✅ 3 VARIABLES (NEW 🔥)
+    elif num_vars == 3:
+        ax = fig.add_subplot(111, projection='3d')
+
+        x = np.linspace(0, 10, 30)
+        y = np.linspace(0, 10, 30)
+        X, Y = np.meshgrid(x, y)
+
+        for i in range(len(A)):
+            a1, a2, a3 = A[i]
+            if a3 != 0:
+                Z = (b[i] - a1*X - a2*Y) / a3
+                ax.plot_surface(X, Y, Z, alpha=0.3)
+
+        ax.scatter(solution[0], solution[1], solution[2])
+        ax.set_xlabel("x1")
+        ax.set_ylabel("x2")
+        ax.set_zlabel("x3")
+        ax.set_title("3D Feasible Region")
+
+    return fig
