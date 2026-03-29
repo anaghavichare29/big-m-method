@@ -1,5 +1,3 @@
-M = 1e6
-
 def big_m_method(c, A, b, signs):
     m = len(A)
     n = len(c)
@@ -7,7 +5,8 @@ def big_m_method(c, A, b, signs):
     table = []
     basis = []
     cb = []
-        var_names = [f"x{i+1}" for i in range(n)]
+
+    var_names = [f"x{i+1}" for i in range(n)]
     slack_names = [f"s{i+1}" for i in range(m)]
     artificial_names = [f"A{i+1}" for i in range(m)]
 
@@ -72,6 +71,7 @@ def big_m_method(c, A, b, signs):
 
         steps.append((df.copy(), pivot_row, pivot_col))
 
+        # Pivot operation
         pivot = table[pivot_row][pivot_col]
         table[pivot_row] /= pivot
 
